@@ -37,6 +37,8 @@ dotnet user-secrets set "Email:AdminSiteUrl" "https://your-site/admin.html"
 
 Run with `dotnet run --project src/GlobalTalentSolutions.Api`.
 
+Open `https://localhost:<port>/swagger` to test the API. Execute `POST /api/admin/login` first; Swagger UI will retain the secure HttpOnly login cookie for subsequent admin requests. Use the HTTPS URL printed by `dotnet run`.
+
 ## API
 
 - `POST /api/enquiries`

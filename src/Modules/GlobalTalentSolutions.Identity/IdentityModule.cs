@@ -15,8 +15,8 @@ public static class IdentityModule
     public static IEndpointRouteBuilder MapIdentityModule(this IEndpointRouteBuilder app)
     {
         app.MapPost("/api/admin/login", async (LoginRequest login, SupabaseAdminSessions sessions, HttpContext context, CancellationToken ct) =>
-            await sessions.SignIn(login, context, ct) ? Results.Ok(new { login.Email }) : Results.Unauthorized());
-        app.MapPost("/api/admin/logout", (HttpContext context) => { context.Response.Cookies.Delete("gts_admin", SupabaseAdminSessions.Cookie); return Results.NoContent(); });
+            await sessions.SignIn(login, context, ct) ? Results.Ok(new { login.Email }) : Results.Unauthorized()).WithTags("Admin authentication").WithName("AdminLogin");
+        app.MapPost("/api/admin/logout", (HttpContext context) => { context.Response.Cookies.Delete("gts_admin", SupabaseAdminSessions.Cookie); return Results.NoContent(); }).WithTags("Admin authentication").WithName("AdminLogout");
         return app;
     }
 }

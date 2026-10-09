@@ -20,16 +20,16 @@ public static class EnquiriesModule
             if (errors.Count > 0) return Results.ValidationProblem(errors);
             var result = await service.Create(request, ct);
             return Results.Created($"/api/enquiries/{result.Id}", new { result.Reference, message = "Your enquiry has been received." });
-        }).RequireRateLimiting("public-form");
+        }).RequireRateLimiting("public-form").WithTags("Public enquiries").WithName("CreateEnquiry");
 
         var admin = app.MapGroup("/api/admin/enquiries").AddEndpointFilter<AdminEndpointFilter>();
-        admin.MapGet("/", (string? status, string? search, int? page, EnquiryService service, CancellationToken ct) => service.List(status, search, page ?? 1, ct));
-        admin.MapGet("/{id:guid}", async (Guid id, EnquiryService service, CancellationToken ct) => (await service.Get(id, ct)) is { } item ? Results.Ok(item) : Results.NotFound());
+        admin.MapGet("/", (string? status, string? search, int? page, EnquiryService service, CancellationToken ct) => service.List(status, search, page ?? 1, ct)).WithTags("Admin enquiries").WithName("ListEnquiries");
+        admin.MapGet("/{id:guid}", async (Guid id, EnquiryService service, CancellationToken ct) => (await service.Get(id, ct)) is { } item ? Results.Ok(item) : Results.NotFound()).WithTags("Admin enquiries").WithName("GetEnquiry");
         admin.MapPatch("/{id:guid}", async (Guid id, UpdateEnquiry update, EnquiryService service, CancellationToken ct) =>
         {
             if (update.Status is not null && update.Status is not ("new" or "in_progress" or "closed")) return Results.BadRequest(new { message = "Invalid status." });
             return (await service.Update(id, update, ct)) is { } item ? Results.Ok(item) : Results.NotFound();
-        });
+        }).WithTags("Admin enquiries").WithName("UpdateEnquiry");
         return app;
     }
 }

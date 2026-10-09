@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup><UserSecretsId>global-talent-solutions</UserSecretsId></PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <ProjectReference Include="..\GlobalTalentSolutions.SharedKernel\GlobalTalentSolutions.SharedKernel.csproj" />
     <ProjectReference Include="..\Modules\GlobalTalentSolutions.Enquiries\GlobalTalentSolutions.Enquiries.csproj" />
     <ProjectReference Include="..\Modules\GlobalTalentSolutions.Identity\GlobalTalentSolutions.Identity.csproj" />
