@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createEnquiry } from './api.js'
+import BrandLogo from './components/BrandLogo.jsx'
 
 const initialForm = {
   name: '', email: '', phone: '', company: '',
@@ -29,10 +30,7 @@ export default function App() {
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Global Talent Solutions home">
-          <span className="brand-mark">G</span>
-          <span>GLOBAL TALENT <small>SOLUTIONS</small></span>
-        </a>
+        <a className="brand" href="#top" aria-label="Global Talent Solutions home"><BrandLogo /></a>
         <nav><a href="#services">Services</a><a href="#contact">Let’s talk</a></nav>
       </header>
 
