@@ -11,7 +11,12 @@ namespace GlobalTalentSolutions.Identity;
 
 public static class IdentityModule
 {
-    public static IServiceCollection AddIdentityModule(this IServiceCollection services) => services.AddScoped<IAdminSessionValidator, SupabaseAdminSessions>();
+    public static IServiceCollection AddIdentityModule(this IServiceCollection services)
+    {
+        services.AddScoped<SupabaseAdminSessions>();
+        services.AddScoped<IAdminSessionValidator>(provider => provider.GetRequiredService<SupabaseAdminSessions>());
+        return services;
+    }
     public static IEndpointRouteBuilder MapIdentityModule(this IEndpointRouteBuilder app)
     {
         app.MapPost("/api/admin/login", async (LoginRequest login, SupabaseAdminSessions sessions, HttpContext context, CancellationToken ct) =>
