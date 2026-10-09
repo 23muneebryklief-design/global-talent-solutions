@@ -31,6 +31,7 @@ function drawCover(context, image, width, height) {
 
 export default function Banner() {
   const [activeSlide, setActiveSlide] = useState(0)
+  const [textHidden, setTextHidden] = useState(false)
   const canvasRef = useRef(null)
   const imagesRef = useRef([])
   const activeRef = useRef(0)
@@ -69,6 +70,7 @@ export default function Banner() {
   const changeSlide = useCallback((targetIndex) => {
     if (transitioningRef.current || targetIndex === activeRef.current) return
     transitioningRef.current = true
+    setTextHidden(true)
     const outgoingIndex = activeRef.current
     const duration = 950
     const maxPixelSize = 18
@@ -84,6 +86,7 @@ export default function Banner() {
           switched = true
           activeRef.current = targetIndex
           setActiveSlide(targetIndex)
+          window.setTimeout(() => setTextHidden(false), 40)
         }
         drawSlide(targetIndex, maxPixelSize - (maxPixelSize - 1) * ((progress - .5) / .5))
       }
@@ -92,6 +95,7 @@ export default function Banner() {
         animationRef.current = requestAnimationFrame(animate)
       } else {
         transitioningRef.current = false
+        setTextHidden(false)
         drawSlide(targetIndex, 1)
       }
     }
@@ -137,7 +141,7 @@ export default function Banner() {
   }
 
   return (
-    <section className={`banner banner--${slide.side}`} onClick={showNextSlide} onKeyDown={handleKeyDown} role="button" tabIndex="0" aria-label="Change banner image">
+    <section className={`banner banner--${slide.side}${textHidden ? ' banner--text-hidden' : ''}`} onClick={showNextSlide} onKeyDown={handleKeyDown} role="button" tabIndex="0" aria-label="Change banner image">
       <canvas className="banner__canvas" ref={canvasRef} aria-hidden="true" />
       <span className="sr-only">{slide.imageAlt}</span>
 

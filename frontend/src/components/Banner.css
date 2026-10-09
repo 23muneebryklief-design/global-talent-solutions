@@ -43,7 +43,13 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transform: translateY(-50%);
+  transition: opacity .4s ease, filter .4s ease;
   cursor: default;
+}
+
+.banner--text-hidden .banner__content {
+  opacity: 0;
+  filter: blur(12px);
 }
 
 .banner--left .banner__content { left: 7%; right: auto; text-align: left; }
