@@ -1,4 +1,5 @@
 import './BrandLogo.css'
+import globeImage from '../assets/gts-globe.png'
 
 export default function BrandLogo({ variant = 'horizontal', className = '' }) {
   return (
@@ -14,7 +15,7 @@ export default function BrandLogo({ variant = 'horizontal', className = '' }) {
           </defs>
           <ellipse cx="90" cy="90" rx="80" ry="27" fill="none" stroke="url(#gts-orbit-gold)" strokeWidth="8" />
         </svg>
-        <img className="brand-logo__globe" src="/brand/gts-globe.png" alt="" />
+        <img className="brand-logo__globe" src={globeImage} alt="" />
         <svg className="brand-logo__orbit brand-logo__orbit--front" viewBox="0 0 180 180">
           <path d="M18 93c25 32 111 39 146-2" fill="none" stroke="url(#gts-orbit-gold)" strokeWidth="8" strokeLinecap="round" />
         </svg>
