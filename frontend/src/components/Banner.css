@@ -28,6 +28,10 @@
   width: 100%;
   height: 100%;
   display: block;
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+  transition: opacity .7s ease, filter .7s ease, transform .7s ease;
 }
 
 .banner__content {
@@ -43,13 +47,19 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transform: translateY(-50%);
-  transition: opacity .4s ease, filter .4s ease;
+  transition: opacity .7s ease, filter .7s ease;
   cursor: default;
 }
 
 .banner--text-hidden .banner__content {
   opacity: 0;
-  filter: blur(12px);
+  filter: blur(16px);
+}
+
+.banner--text-hidden .banner__canvas {
+  opacity: .18;
+  filter: blur(18px);
+  transform: scale(1.025);
 }
 
 .banner--left .banner__content { left: 7%; right: auto; text-align: left; }

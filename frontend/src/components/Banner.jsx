@@ -36,10 +36,10 @@ export default function Banner() {
   const imagesRef = useRef([])
   const activeRef = useRef(0)
   const transitioningRef = useRef(false)
-  const animationRef = useRef()
+  const transitionTimersRef = useRef([])
   const slide = slides[activeSlide]
 
-  const drawSlide = useCallback((index, pixelSize = 1) => {
+  const drawSlide = useCallback((index) => {
     const canvas = canvasRef.current
     const image = imagesRef.current[index]
     if (!canvas || !image?.complete) return
@@ -52,55 +52,31 @@ export default function Banner() {
       canvas.height = height
     }
 
-    const block = Math.max(1, Math.round(pixelSize * ratio))
-    const smallWidth = Math.max(1, Math.ceil(width / block))
-    const smallHeight = Math.max(1, Math.ceil(height / block))
-    const buffer = document.createElement('canvas')
-    buffer.width = smallWidth
-    buffer.height = smallHeight
-    const bufferContext = buffer.getContext('2d')
-    drawCover(bufferContext, image, smallWidth, smallHeight)
-
     const context = canvas.getContext('2d')
     context.clearRect(0, 0, width, height)
-    context.imageSmoothingEnabled = false
-    context.drawImage(buffer, 0, 0, smallWidth, smallHeight, 0, 0, width, height)
+    context.imageSmoothingEnabled = true
+    context.imageSmoothingQuality = 'high'
+    drawCover(context, image, width, height)
   }, [])
 
   const changeSlide = useCallback((targetIndex) => {
     if (transitioningRef.current || targetIndex === activeRef.current) return
     transitioningRef.current = true
     setTextHidden(true)
-    const outgoingIndex = activeRef.current
-    const duration = 950
-    const maxPixelSize = 18
-    const startedAt = performance.now()
-    let switched = false
 
-    function animate(now) {
-      const progress = Math.min((now - startedAt) / duration, 1)
-      if (progress < .5) {
-        drawSlide(outgoingIndex, 1 + (maxPixelSize - 1) * (progress / .5))
-      } else {
-        if (!switched) {
-          switched = true
-          activeRef.current = targetIndex
-          setActiveSlide(targetIndex)
-          window.setTimeout(() => setTextHidden(false), 40)
-        }
-        drawSlide(targetIndex, maxPixelSize - (maxPixelSize - 1) * ((progress - .5) / .5))
-      }
+    const swapTimer = window.setTimeout(() => {
+      activeRef.current = targetIndex
+      setActiveSlide(targetIndex)
+      drawSlide(targetIndex)
+      window.requestAnimationFrame(() => setTextHidden(false))
+    }, 700)
 
-      if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animate)
-      } else {
-        transitioningRef.current = false
-        setTextHidden(false)
-        drawSlide(targetIndex, 1)
-      }
-    }
+    const finishTimer = window.setTimeout(() => {
+      transitioningRef.current = false
+      setTextHidden(false)
+    }, 1450)
 
-    animationRef.current = requestAnimationFrame(animate)
+    transitionTimersRef.current = [swapTimer, finishTimer]
   }, [drawSlide])
 
   const showNextSlide = useCallback(() => {
@@ -124,7 +100,7 @@ export default function Banner() {
     return () => {
       cancelled = true
       resizeObserver.disconnect()
-      cancelAnimationFrame(animationRef.current)
+      transitionTimersRef.current.forEach(timer => window.clearTimeout(timer))
     }
   }, [drawSlide])
 
