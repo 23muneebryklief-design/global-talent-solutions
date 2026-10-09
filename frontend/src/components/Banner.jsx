@@ -117,9 +117,8 @@ export default function Banner() {
   }
 
   return (
-    <section className={`banner banner--${slide.side}${textHidden ? ' banner--text-hidden' : ''}`} onClick={showNextSlide} onKeyDown={handleKeyDown} role="button" tabIndex="0" aria-label="Change banner image">
+    <section className={`banner banner--${slide.side}${textHidden ? ' banner--text-hidden' : ''}`} onClick={showNextSlide} onKeyDown={handleKeyDown} role="button" tabIndex="0" aria-label={`${slide.imageAlt}. Activate to change banner image.`}>
       <canvas className="banner__canvas" ref={canvasRef} aria-hidden="true" />
-      <span className="sr-only">{slide.imageAlt}</span>
 
       <div className="banner__content" onClick={event => event.stopPropagation()}>
         <p className="banner__eyebrow">{slide.eyebrow}</p>
