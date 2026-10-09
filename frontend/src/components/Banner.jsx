@@ -10,7 +10,7 @@ const slides = [
     eyebrow: 'USA businesses. South African talent.',
     title: <>Global reach.<br />Exceptional <em>people.</em></>,
     intro: 'Connect your business with carefully matched South African professionals who are ready to make an impact.',
-    side: 'left',
+    side: 'right',
   },
   {
     image: ukImage,
@@ -18,7 +18,7 @@ const slides = [
     eyebrow: 'UK businesses. South African talent.',
     title: <>Build stronger.<br />Work <em>smarter.</em></>,
     intro: 'Grow your team with skilled, dependable professionals chosen around your business and the way you work.',
-    side: 'right',
+    side: 'left',
   },
 ]
 
