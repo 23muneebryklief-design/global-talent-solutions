@@ -37,6 +37,18 @@ dotnet user-secrets set "Email:AdminSiteUrl" "https://your-site/admin.html"
 
 Run with `dotnet run --project src/GlobalTalentSolutions.Api`.
 
+## Frontend
+
+The React/Vite application is in `frontend`.
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Vite runs at `http://localhost:5173` and proxies `/api` to `http://localhost:5000`. Copy `.env.example` to `.env` to change the backend address.
+
 Open `https://localhost:<port>/swagger` to test the API. Execute `POST /api/admin/login` first; Swagger UI will retain the secure HttpOnly login cookie for subsequent admin requests. Use the HTTPS URL printed by `dotnet run`.
 
 ## API

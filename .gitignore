@@ -4,3 +4,5 @@ obj/
 *.user
 appsettings.Development.json
 .env
+node_modules/
+dist/
