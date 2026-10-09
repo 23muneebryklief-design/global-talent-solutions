@@ -1,5 +1,7 @@
 .banner {
   position: relative;
+  box-sizing: border-box;
+  height: 600px;
   min-height: 600px;
   display: flex;
   align-items: center;
@@ -36,12 +38,14 @@
   box-shadow: 0 20px 55px rgba(7, 31, 47, .2);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: margin .65s ease, transform .65s ease;
+  transition: transform .65s ease;
   cursor: default;
 }
 
-.banner--left .banner__content { margin-right: auto; }
-.banner--right .banner__content { margin-left: auto; }
+.banner--left { justify-content: flex-start; }
+.banner--right { justify-content: flex-end; }
+.banner--left .banner__content,
+.banner--right .banner__content { margin: 0; text-align: left; }
 .banner__eyebrow { margin: 0; color: #9a691d; font-size: 11px; font-weight: 700; letter-spacing: 2.4px; text-transform: uppercase; }
 .banner h1 { margin: 22px 0; color: #12364a; font-family: Georgia, serif; font-size: clamp(48px, 5.5vw, 76px); font-weight: 400; line-height: 1.02; letter-spacing: -2px; }
 .banner h1 em { color: #b17e26; font-weight: 400; }
@@ -71,7 +75,7 @@
 .banner__controls button.is-active { background: #d0a348; transform: scale(1.2); }
 
 @media (max-width: 800px) {
-  .banner { min-height: 620px; padding: 42px 6%; align-items: flex-end; }
+  .banner { height: auto; min-height: 620px; padding: 42px 6%; align-items: flex-end; }
   .banner__content { width: 100%; padding: 28px; margin: 0 !important; }
   .banner h1 { font-size: clamp(42px, 12vw, 62px); }
 }

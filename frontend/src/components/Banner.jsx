@@ -71,7 +71,7 @@ export default function Banner() {
     transitioningRef.current = true
     const outgoingIndex = activeRef.current
     const duration = 950
-    const maxPixelSize = 42
+    const maxPixelSize = 18
     const startedAt = performance.now()
     let switched = false
 
