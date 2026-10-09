@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { createEnquiry } from './api.js'
 import BrandLogo from './components/BrandLogo.jsx'
+import Banner from './components/Banner.jsx'
 
 const initialForm = {
   name: '', email: '', phone: '', company: '',
@@ -35,15 +36,7 @@ export default function App() {
       </header>
 
       <main id="top">
-        <section className="hero">
-          <div>
-            <p className="eyebrow">SOUTH AFRICAN TALENT. GLOBAL OPPORTUNITIES.</p>
-            <h1>Great people.<br />Greater <em>possibilities.</em></h1>
-            <p className="intro">Connecting USA and UK businesses with exceptional South African professionals.</p>
-            <a className="button" href="#contact">Find your next hire →</a>
-          </div>
-          <div className="hero-art" aria-hidden="true"><div className="globe">✳</div><p>Talent knows<br />no borders.</p></div>
-        </section>
+        <Banner />
 
         <section className="services" id="services">
           <p className="eyebrow">OUR EXPERTISE</p>
