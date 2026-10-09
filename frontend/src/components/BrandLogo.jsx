@@ -1,4 +1,5 @@
 import './BrandLogo.css'
+import globeImage from '../assets/gts-globe.png'
 
 export default function BrandLogo({ variant = 'horizontal', className = '' }) {
   return (
@@ -11,21 +12,10 @@ export default function BrandLogo({ variant = 'horizontal', className = '' }) {
               <stop offset=".45" stopColor="#e0bd69" />
               <stop offset="1" stopColor="#a8741f" />
             </linearGradient>
-            <clipPath id="gts-globe-clip"><circle cx="90" cy="76" r="53" /></clipPath>
           </defs>
-          <circle cx="90" cy="76" r="53" fill="#0c3a5b" stroke="#092f4a" strokeWidth="3" />
-          <g clipPath="url(#gts-globe-clip)" fill="none" stroke="#f4efe2" strokeWidth="1.6" opacity=".72">
-            <ellipse cx="90" cy="76" rx="28" ry="53" />
-            <ellipse cx="90" cy="76" rx="48" ry="53" />
-            <path d="M37 76h106M42 54c30 12 66 12 96 0M42 98c30-12 66-12 96 0" />
-          </g>
-          <g fill="#f5f0e4">
-            <path d="M49 48l10-12 19-7 13 6-5 9-12 2-4 8-11 1z" />
-            <path d="M74 60l13-9 11 5 8-3 14 8-4 10-13 2-3 11-8 3-5-11-10-5z" />
-            <path d="M96 88l16-7 13 8-4 12-9 5-5 19-9-7-2-15-8-8z" />
-            <path d="M122 43l12 5 7 11-8 6-9-5-7-10z" />
-          </g>
-          <ellipse cx="90" cy="79" rx="78" ry="25" fill="none" stroke="url(#gts-orbit-gold)" strokeWidth="8" transform="rotate(-17 90 79)" />
+          <ellipse cx="90" cy="80" rx="78" ry="25" fill="none" stroke="url(#gts-orbit-gold)" strokeWidth="8" transform="rotate(-17 90 80)" />
+          <image href={globeImage} x="25" y="12" width="130" height="125" preserveAspectRatio="xMidYMid meet" />
+          <path d="M18 89c27 30 108 34 145-4" fill="none" stroke="url(#gts-orbit-gold)" strokeWidth="8" strokeLinecap="round" transform="rotate(-17 90 80)" />
         </svg>
       </span>
 
